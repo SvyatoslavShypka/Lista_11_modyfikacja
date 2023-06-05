@@ -27,15 +27,6 @@ public class Graph<T> {
             adjacencyMatrix[sourceIndex][destinationIndex] = edge.getDistance();
             adjacencyMatrix[destinationIndex][sourceIndex] = edge.getDistance();
         }
-/*
-//print adjacencyMatrix
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(adjacencyMatrix[i][j] + "\t");
-            }
-            System.out.println();
-        }
-*/
     }
 
     public Map<T, Integer> calculateShortestPaths(T startNode) throws NoSuchElementException {
@@ -44,11 +35,12 @@ public class Graph<T> {
         Map<T, Integer> result = dijkstra(adjacencyMatrix, startNode);
         return result;
     }
-
+// modyfikacja
     public Integer calculateShortestPath(T startNode, T endNode) throws NoSuchElementException {
         // TODO: Wylicz najkrótszą ścieżkę pomiędzy wierzchołkami w grafie
-
-        return -1;
+        if (getIndex(endNode) < 0) throw new NoSuchElementException();
+        Map<T, Integer> resultMap = calculateShortestPaths(startNode);
+        return resultMap.get(endNode);
     }
 
 
